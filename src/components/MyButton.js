@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, TouchableHighlight} from 'react-native';
 
 const MyButton = props => {
-  console.log(props);
+  // console.log(props);
   return (
     <TouchableHighlight style={styles.button} onPress={props.onCLick}>
       <Text>{props.texto}</Text>
@@ -15,11 +15,11 @@ export default MyButton;
 const styles = StyleSheet.create({
   text: {
     fontSize: 24,
-    color: 'black',
+    color: 'white',
   },
   button: {
     alignItems: 'center',
-    backgroundColor: '#ffe51f',
+    backgroundColor: '#000066',
     padding: 10,
     margin: 10,
   },
