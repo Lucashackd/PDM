@@ -1,49 +1,22 @@
-import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import MyButton from './src/components/MyButton';
+import * as React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import Home from './src/screens/Home';
+import SignIn from './src/screens/SignIn';
+import SignUp from './src/screens/SignUp';
 
-const PDM = () => {
-  const [contador, setContador] = useState(0);
+const Stack = createNativeStackNavigator();
 
-  useEffect(() => {
-    console.log('Montou o componente.');
-  }, []);
-
-  // useEffect(() => {
-  //   console.log('Fez update no componente.');
-  // });
-
-  useEffect(() => {
-    console.log('Fez update baseado em contador.');
-  }, [contador]);
-
-  const contar = () => {
-    setContador(contador + 1);
-  };
-
-  const diminuir = () => {
-    setContador(contador - 1);
-  };
-
-  const reset = () => {
-    setContador(0);
-  };
-
+function App() {
   return (
-    <View>
-      <Text style={styles.text}>Contador = {contador}</Text>
-      <MyButton texto="Incrementar" onCLick={contar} />
-      <MyButton texto="Decrementar" onCLick={diminuir} />
-      <MyButton texto="Resetar" onCLick={reset} />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="SignIn">
+        <Stack.Screen name="SignIn" component={SignIn} />
+        <Stack.Screen name="SignUp" component={SignUp} />
+        <Stack.Screen name="Home" component={Home} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-};
+}
 
-export default PDM;
-
-const styles = StyleSheet.create({
-  text: {
-    fontSize: 24,
-    color: '#000066',
-  },
-});
+export default App;
