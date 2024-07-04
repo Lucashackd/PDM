@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "30999004876",
+    "project_id": "pdm-5-73afe",
+    "storage_bucket": "pdm-5-73afe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:30999004876:android:d1c0d941fa8dd10c1ee469",
+        "android_client_info": {
+          "package_name": "com.pdm"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzTxF8D6b47beSIbdOZRGPXoBzYULQnEg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

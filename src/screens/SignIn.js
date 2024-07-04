@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Alert,
   Image,
@@ -13,12 +13,15 @@ import MyButton from '../components/MyButton';
 import {COLORS} from '../assets/colors';
 
 const SignIn = props => {
+  const [email, setEmail] = useState('');
+  const [pass, setPass] = useState();
+
   const recuperarSenha = () => {
     Alert.alert('Recupearar Senha', 'Digite a nova senha');
   };
 
   const entrar = () => {
-    Alert.alert('Acessar o sistema', 'Login');
+    console.log(`Email=${email} Senha=${pass}`);
   };
 
   const cadastrar = () => {
@@ -34,8 +37,25 @@ const SignIn = props => {
             source={require('../assets/images/logo.png')}
             accessibilityLabel="logo do app"
           />
-          <TextInput style={styles.input} />
-          <TextInput style={styles.input} />
+          <TextInput
+            style={styles.input}
+            placeholder="Email"
+            keyboardType="email-address"
+            returnKeyType="next"
+            onChangeText={t => setEmail(t)}
+            onEndEditing={() => this.passTextInput.focus()}
+          />
+          <TextInput
+            ref={ref => {
+              this.passTextInput = ref;
+            }}
+            style={styles.input}
+            secureTextEntry={true}
+            placeholder="Senha"
+            keyboardType="default"
+            returnKeyType="go"
+            onChangeText={t => setPass(t)}
+          />
           <Text style={styles.textEsqueceuSenha} onPress={recuperarSenha}>
             Esqueceu sua senha?
           </Text>
