@@ -11,10 +11,9 @@ import {
 } from 'react-native';
 import MyButton from '../components/MyButton';
 import {COLORS} from '../assets/colors';
-import app from '@react-native-firebase/app';
+// import app from '@react-native-firebase/app';
 import auth from '@react-native-firebase/auth';
-import { CommonActions } from '@react-navigation/native';
-import Home from './Home';
+import {CommonActions} from '@react-navigation/native';
 
 const SignIn = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -25,39 +24,39 @@ const SignIn = ({navigation}) => {
   };
 
   const entrar = () => {
-    if (email !== '' && pass != ''){
+    if (email !== '' && pass !== '') {
       auth()
-      .signInWithEmailAndPassword(email, pass)
-      .then(() => {
-        navigation.dispatch(
-          CommonActions.reset({
-            index: 0,
-            routes: [{name: 'Home'}],
-          }),
-        );
-      })
-      .catch(e => {
-        console.log('SignIn: erro em entrar ' + e);
-        switch (e.code) {
-          case 'auth/invalid-credential':
-            Alert.alert('ERRO', 'Credencial inválida.');
-          break;
-          case 'auth/user-not-found':
-            Alert.alert('ERRO', 'Usuário não encontrado.');
-          break;
-          case 'auth/wrong-password':
-            Alert.alert('ERRO', 'Senha inválida.');
-          break;
-          case 'auth/invalid-email':
-            Alert.alert('ERRO', 'Email inválido.');
-          break;
-          case 'auth/user-disabled':
-            Alert.alert('ERRO', 'Usuário desativado.');
-          break;
-          default:
-            Alert.alert('ERRO AO LOGAR', `${e}`);
-        }
-      });
+        .signInWithEmailAndPassword(email, pass)
+        .then(() => {
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 0,
+              routes: [{name: 'Home'}],
+            }),
+          );
+        })
+        .catch(e => {
+          console.log('SignIn: erro em entrar ' + e);
+          switch (e.code) {
+            case 'auth/invalid-credential':
+              Alert.alert('ERRO', 'Credencial inválida.');
+              break;
+            case 'auth/user-not-found':
+              Alert.alert('ERRO', 'Usuário não encontrado.');
+              break;
+            case 'auth/wrong-password':
+              Alert.alert('ERRO', 'Senha inválida.');
+              break;
+            case 'auth/invalid-email':
+              Alert.alert('ERRO', 'Email inválido.');
+              break;
+            case 'auth/user-disabled':
+              Alert.alert('ERRO', 'Usuário desativado.');
+              break;
+            default:
+              Alert.alert('ERRO AO LOGAR', `${e}`);
+          }
+        });
     } else {
       Alert.alert(
         'ERRO',
