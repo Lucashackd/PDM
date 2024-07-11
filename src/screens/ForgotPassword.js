@@ -49,7 +49,6 @@ const ForgotPassword = ({navigation}) => {
       <TextInput
         style={styles.input}
         placeholder="Email"
-        placeholderTextColor="blue"
         keyboardType="email-address"
         autoCapitalize="none"
         returnKeyType="go"

@@ -16,7 +16,7 @@ function App() {
       <StatusBar backgroundColor={COLORS.primaryDark} />
       <Stack.Navigator initialRouteName="SignIn">
         <Stack.Screen name="SignIn" component={SignIn} options={signInStyle} />
-        <Stack.Screen name="SignUp" component={SignUp} />
+        <Stack.Screen name="SignUp" component={SignUp} options={signUpStyle} />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen
           name="ForgotPassword"
@@ -39,6 +39,14 @@ const signInStyle = {
 
 const forgotPasswordStyle = {
   title: 'Recuperar senha',
+  headerStyle: {backgroundColor: COLORS.primary},
+  headerTitleStyle: {color: COLORS.white},
+  headerTintColor: COLORS.white,
+};
+
+const signUpStyle = {
+  // headerLeft: false,
+  title: 'Cadastre-se',
   headerStyle: {backgroundColor: COLORS.primary},
   headerTitleStyle: {color: COLORS.white},
   headerTintColor: COLORS.white,

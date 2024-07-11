@@ -66,12 +66,7 @@ const SignIn = ({navigation}) => {
   };
 
   const cadastrar = () => {
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 0,
-        routes: [{name: 'SignUp'}],
-      }),
-    );
+    navigation.navigate('SignUp');
   };
 
   return (
@@ -86,7 +81,6 @@ const SignIn = ({navigation}) => {
           <TextInput
             style={styles.input}
             placeholder="Email"
-            placeholderTextColor="blue"
             keyboardType="email-address"
             autoCapitalize="none"
             returnKeyType="next"
@@ -100,7 +94,6 @@ const SignIn = ({navigation}) => {
             style={styles.input}
             secureTextEntry={true}
             placeholder="Senha"
-            placeholderTextColor="blue"
             keyboardType="default"
             returnKeyType="go"
             onChangeText={t => setPass(t)}
