@@ -4,6 +4,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from './src/screens/Home';
 import SignIn from './src/screens/SignIn';
 import SignUp from './src/screens/SignUp';
+import ForgotPassword from './src/screens/ForgotPassword';
 import {StatusBar} from 'react-native';
 import {COLORS} from './src/assets/colors';
 
@@ -14,13 +15,14 @@ function App() {
     <NavigationContainer>
       <StatusBar backgroundColor={COLORS.primaryDark} />
       <Stack.Navigator initialRouteName="SignIn">
-        <Stack.Screen
-          name="Bem Vindo"
-          component={SignIn}
-          options={signInStyle}
-        />
+        <Stack.Screen name="SignIn" component={SignIn} options={signInStyle} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen
+          name="ForgotPassword"
+          component={ForgotPassword}
+          options={forgotPasswordStyle}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -33,4 +35,11 @@ const signInStyle = {
   title: 'Bem vindo',
   headerStyle: {backgroundColor: COLORS.primary},
   headerTitleStyle: {color: COLORS.white},
+};
+
+const forgotPasswordStyle = {
+  title: 'Recuperar senha',
+  headerStyle: {backgroundColor: COLORS.primary},
+  headerTitleStyle: {color: COLORS.white},
+  headerTintColor: COLORS.white,
 };

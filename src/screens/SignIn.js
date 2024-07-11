@@ -20,7 +20,7 @@ const SignIn = ({navigation}) => {
   const [pass, setPass] = useState();
 
   const recuperarSenha = () => {
-    Alert.alert('Recupearar Senha', 'Digite a nova senha');
+    navigation.navigate('ForgotPassword');
   };
 
   const entrar = () => {
@@ -59,14 +59,19 @@ const SignIn = ({navigation}) => {
         });
     } else {
       Alert.alert(
-        'ERRO',
+        'ATENÇÃO',
         'Por favor, preencha os campos EMAIL e SENHA para entrar.',
       );
     }
   };
 
   const cadastrar = () => {
-    Alert.alert('Realizar cadastro', 'SignUp');
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 0,
+        routes: [{name: 'SignUp'}],
+      }),
+    );
   };
 
   return (
