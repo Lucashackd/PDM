@@ -49,6 +49,7 @@ const ForgotPassword = ({navigation}) => {
       <TextInput
         style={styles.input}
         placeholder="Email"
+        placeholderTextColor={COLORS.grey}
         keyboardType="email-address"
         autoCapitalize="none"
         returnKeyType="go"
@@ -65,7 +66,8 @@ export default ForgotPassword;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    // justifyContent: 'center',
+    alignItems: 'center',
   },
   input: {
     width: '95%',

@@ -16,4 +16,5 @@ export const TextInput = styled.TextInput`
   padding-left: 2px;
   padding-bottom: 1px;
   margin-bottom: 10px;
+  color: ${COLORS.black}
 `;

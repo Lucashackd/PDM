@@ -34,20 +34,20 @@ const signInStyle = {
   // headerLeft: false,
   title: 'Bem vindo',
   headerStyle: {backgroundColor: COLORS.primary},
-  headerTitleStyle: {color: COLORS.white},
+  headerTitleStyle: {color: COLORS.black},
 };
 
 const forgotPasswordStyle = {
   title: 'Recuperar senha',
   headerStyle: {backgroundColor: COLORS.primary},
-  headerTitleStyle: {color: COLORS.white},
-  headerTintColor: COLORS.white,
+  headerTitleStyle: {color: COLORS.black},
+  headerTintColor: COLORS.black,
 };
 
 const signUpStyle = {
   // headerLeft: false,
   title: 'Cadastre-se',
   headerStyle: {backgroundColor: COLORS.primary},
-  headerTitleStyle: {color: COLORS.white},
-  headerTintColor: COLORS.white,
+  headerTitleStyle: {color: COLORS.black},
+  headerTintColor: COLORS.black,
 };

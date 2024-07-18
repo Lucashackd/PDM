@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
 import {Body, TextInput} from './styles';
-import MyButton from '../../components/MyButton';
 import auth from '@react-native-firebase/auth';
-import {Alert} from 'react-native';
+import firestore from '@react-native-firebase/firestore';
 import {CommonActions} from '@react-navigation/native';
+import MyButton from '../../components/MyButton';
+import {Alert} from 'react-native';
+import {COLORS} from '../../assets/colors';
 
 const SignUp = ({navigation}) => {
   const [nome, setNome] = useState('');
@@ -11,44 +13,58 @@ const SignUp = ({navigation}) => {
   const [pass, setPass] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
 
+  console.log(firestore);
+
   const cadastrar = () => {
     if (nome !== '' && email !== '' && pass !== '' && confirmPass !== '') {
-      auth()
-        .createUserWithEmailAndPassword(email, pass)
-        .then(() => {
-          Alert.alert('Informação', 'Usuário cadastrado com sucesso.');
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 0,
-              routes: [{name: 'Home'}],
-            }),
-          );
-        })
-        .catch(e => {
-          console.log('SignIn: erro em entrar ' + e);
-          switch (e.code) {
-            // case 'auth/invalid-credential':
-            //   Alert.alert('ERRO', 'Credencial inválida.');
-            //   break;
-            case 'auth/email-already-in-use':
-              Alert.alert('ERRO', 'Email já está em uso.');
-              break;
-            case 'auth/invalid-email':
-              Alert.alert('ERRO', 'Email inválido.');
-              break;
-            case 'auth/operation-not-allowed':
-              Alert.alert('ERRO', 'Problemas ao cadastrar o usuário.');
-              break;
-            case 'auth/weak-password':
-              Alert.alert(
-                'ERRO',
-                'Senha fraca, por favor, digite uma senha forte.',
-              );
-              break;
-            default:
-              Alert.alert('ERRO AO LOGAR', `${e}`);
-          }
-        });
+      if (pass === confirmPass) {
+        auth()
+          .createUserWithEmailAndPassword(email, pass)
+          .then(() => {
+            let userF = auth().currentUser;
+            userF
+              .sendEmailVerification()
+              .then(() => {
+                Alert.alert(
+                  'Informação',
+                  'Foi enviado um email para ' + email + ' para verificação.',
+                );
+                navigation.dispatch(
+                  CommonActions.reset({
+                    index: 0,
+                    routes: [{name: 'SignIn'}],
+                  }),
+                );
+              })
+              .catch(e => {
+                console.log('SignUp: erro em cadastrar ' + e);
+              });
+          })
+          .catch(e => {
+            console.log('SignUp: erro em cadastrar ' + e);
+            switch (e.code) {
+              case 'auth/email-already-in-use':
+                Alert.alert('ERRO', 'Email já está em uso.');
+                break;
+              case 'auth/invalid-email':
+                Alert.alert('ERRO', 'Email inválido.');
+                break;
+              case 'auth/operation-not-allowed':
+                Alert.alert('ERRO', 'Problemas ao cadastrar o usuário.');
+                break;
+              case 'auth/weak-password':
+                Alert.alert(
+                  'ERRO',
+                  'Senha fraca, por favor, digite uma senha forte.',
+                );
+                break;
+              default:
+                Alert.alert('ERRO AO LOGAR', `${e}`);
+            }
+          });
+      } else {
+        Alert.alert('ATENÇÃO', 'As senhas informadas não diferentes.');
+      }
     } else {
       Alert.alert(
         'ATENÇÃO',
@@ -60,6 +76,7 @@ const SignUp = ({navigation}) => {
     <Body>
       <TextInput
         placeholder="Nome Completo"
+        placeholderTextColor={COLORS.grey}
         keyboardType="default"
         autoCapitalize="words"
         returnKeyType="next"
@@ -71,6 +88,7 @@ const SignUp = ({navigation}) => {
           this.emailTextInput = ref;
         }}
         placeholder="Email"
+        placeholderTextColor={COLORS.grey}
         keyboardType="email-address"
         autoCapitalize="none"
         returnKeyType="next"
@@ -83,6 +101,7 @@ const SignUp = ({navigation}) => {
         }}
         secureTextEntry={true}
         placeholder="Senha"
+        placeholderTextColor={COLORS.grey}
         keyboardType="default"
         returnKeyType="next"
         onChangeText={t => setPass(t)}
@@ -94,6 +113,7 @@ const SignUp = ({navigation}) => {
         }}
         secureTextEntry={true}
         placeholder="Confirmar Senha"
+        placeholderTextColor={COLORS.grey}
         keyboardType="default"
         returnKeyType="send"
         onChangeText={t => setConfirmPass(t)}

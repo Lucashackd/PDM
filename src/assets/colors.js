@@ -3,10 +3,10 @@
   https://reactnativeelements.com/docs/customization/theme_object
 */
 export const COLORS = {
-  primary: '#5d478b', //equivale a cor primary da paleta do rneui
-  primaryDark: '#351f63', //não há na paleta do rneui
-  accent: '#478b5d', //equivale a cor secondary na paleta do rneui
-  accentSecundary: '#8b5d47', //não há na paleta do rneui
+  primary: '#FFD700', //equivale a cor primary da paleta do rneui
+  primaryDark: '#807640', //não há na paleta do rneui
+  accent: '#A100FF', //equivale a cor secondary na paleta do rneui
+  accentSecundary: '#FF00AD', //não há na paleta do rneui
   grey: '#86939e', //grey4 no rneui
   white: '#F2F2F2', //diferente do white do rneui
   black: '#080808', //whithe do thema Dark do rneui

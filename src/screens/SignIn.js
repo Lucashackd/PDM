@@ -28,6 +28,10 @@ const SignIn = ({navigation}) => {
       auth()
         .signInWithEmailAndPassword(email, pass)
         .then(() => {
+          if (!auth().currentUser.emailVerified) {
+            Alert.alert('Erro', 'Verifique seu email para prosseguir.');
+            return;
+          }
           navigation.dispatch(
             CommonActions.reset({
               index: 0,
@@ -71,16 +75,17 @@ const SignIn = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
+      <ScrollView style={styles.teste}>
         <View style={styles.divSuperior}>
           <Image
             style={styles.image}
-            source={require('../assets/images/logo.png')}
+            source={require('../assets/images/logo-short.png')}
             accessibilityLabel="logo do app"
           />
           <TextInput
             style={styles.input}
             placeholder="Email"
+            placeholderTextColor={COLORS.grey}
             keyboardType="email-address"
             autoCapitalize="none"
             returnKeyType="next"
@@ -94,6 +99,7 @@ const SignIn = ({navigation}) => {
             style={styles.input}
             secureTextEntry={true}
             placeholder="Senha"
+            placeholderTextColor={COLORS.grey}
             keyboardType="default"
             returnKeyType="go"
             onChangeText={t => setPass(t)}
@@ -128,6 +134,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     padding: 20,
+    backgroundColor: COLORS.white,
   },
   divSuperior: {
     flex: 5,
@@ -139,6 +146,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   image: {
+    objectFit: 'contain',
     width: 150,
     height: 150,
     margin: 5,
@@ -155,7 +163,7 @@ const styles = StyleSheet.create({
   },
   textEsqueceuSenha: {
     fontSize: 15,
-    color: COLORS.accentSecundary,
+    color: COLORS.primaryDark,
     alignSelf: 'flex-end',
     marginTop: 10,
     marginBottom: 10,
@@ -194,7 +202,7 @@ const styles = StyleSheet.create({
   },
   textCadastrarSe: {
     fontSize: 16,
-    color: COLORS.accentSecundary,
+    color: COLORS.primaryDark,
     marginLeft: 5,
   },
 });
