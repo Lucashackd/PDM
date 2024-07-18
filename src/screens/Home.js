@@ -1,51 +1,28 @@
-import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import {View} from 'react-native';
 import MyButton from '../components/MyButton';
+import {CommonActions} from '@react-navigation/native';
+import auth from '@react-native-firebase/auth';
 
-const Home = props => {
-  const [contador, setContador] = useState(0);
-
-  // console.log(props);
-
-  // useEffect(() => {
-  //   console.log('Montou o componente.');
-  // }, []);
-
-  // useEffect(() => {
-  //   console.log('Fez update no componente.');
-  // });
-
-  // useEffect(() => {
-  //   console.log('Fez update baseado em contador.');
-  // }, [contador]);
-
-  const contar = () => {
-    setContador(contador + 1);
-  };
-
-  const diminuir = () => {
-    setContador(contador - 1);
-  };
-
-  const reset = () => {
-    setContador(0);
+const Home = ({navigation}) => {
+  const sair = () => {
+    auth()
+      .signOut()
+      .then(() => {
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [{name: 'SignIn'}],
+          }),
+        );
+      });
   };
 
   return (
     <View>
-      <Text style={styles.text}>Contador = {contador}</Text>
-      <MyButton texto="Incrementar" onCLick={contar} />
-      <MyButton texto="Decrementar" onCLick={diminuir} />
-      <MyButton texto="Resetar" onCLick={reset} />
+      <MyButton texto="SAIR" onClick={sair} />
     </View>
   );
 };
 
 export default Home;
-
-const styles = StyleSheet.create({
-  text: {
-    fontSize: 24,
-    color: '#000066',
-  },
-});
