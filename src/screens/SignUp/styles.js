@@ -11,10 +11,10 @@ export const TextInput = styled.TextInput`
   width: 95%;
   height: 50px;
   border-bottom-color: ${COLORS.grey};
-  border-bottom-width: 2;
+  border-bottom-width: 2px;
   font-size: 16px;
   padding-left: 2px;
   padding-bottom: 1px;
   margin-bottom: 10px;
-  color: ${COLORS.black}
+  color: ${COLORS.black};
 `;

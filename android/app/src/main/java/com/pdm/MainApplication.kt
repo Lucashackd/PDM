@@ -13,9 +13,9 @@ import com.facebook.react.flipper.ReactNativeFlipper
 import com.facebook.soloader.SoLoader
 
 // Multidex
-import androidx.multidex.MultiDexApplication
+// import androidx.multidex.MultiDexApplication
 
-class MainApplication : MultiDexApplication(), ReactApplication {
+class MainApplication : Application(), ReactApplication {
 
   override val reactNativeHost: ReactNativeHost =
       object : DefaultReactNativeHost(this) {
