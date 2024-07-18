@@ -13,16 +13,31 @@ const SignUp = ({navigation}) => {
   const [pass, setPass] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
 
-  console.log(firestore);
+  function setUser(user) {
+    firestore()
+      .collection('users')
+      .doc(user.uid)
+      .set({
+        nome: nome,
+        email: email,
+      })
+      .then(() => {
+        console.log('Usuário adicionado na base de dados.');
+      })
+      .catch(e => {
+        console.log('SignIn: erro em setUser: ' + e);
+      });
+  }
 
-  const cadastrar = () => {
+  function cadastrar() {
     if (nome !== '' && email !== '' && pass !== '' && confirmPass !== '') {
       if (pass === confirmPass) {
         auth()
           .createUserWithEmailAndPassword(email, pass)
           .then(() => {
-            let userF = auth().currentUser;
-            userF
+            let user = auth().currentUser;
+            setUser(user);
+            user
               .sendEmailVerification()
               .then(() => {
                 Alert.alert(
@@ -71,7 +86,7 @@ const SignUp = ({navigation}) => {
         'Por favor, preencha os campos EMAIL e SENHA para entrar.',
       );
     }
-  };
+  }
   return (
     <Body>
       <TextInput

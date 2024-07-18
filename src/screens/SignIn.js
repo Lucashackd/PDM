@@ -11,13 +11,40 @@ import {
 } from 'react-native';
 import MyButton from '../components/MyButton';
 import {COLORS} from '../assets/colors';
-// import app from '@react-native-firebase/app';
 import auth from '@react-native-firebase/auth';
 import {CommonActions} from '@react-navigation/native';
+import firestore from '@react-native-firebase/firestore';
+import EncryptedStorage from 'react-native-encrypted-storage';
 
 const SignIn = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState();
+
+  async function storeUserSession(data) {
+    try {
+      data.pass = pass;
+      await EncryptedStorage.setItem('user_session', JSON.stringify({data}));
+    } catch (e) {
+      console.log('SignIn: erro em storeUserSession: ' + e);
+    }
+  }
+
+  const getUser = () => {
+    firestore()
+      .collection('users')
+      .doc(auth().currentUser.uid)
+      .get()
+      .then(doc => {
+        if (doc.exists) {
+          storeUserSession(doc.data());
+        } else {
+          console.log('Documento não encontrado na base de dados.');
+        }
+      })
+      .catch(e => {
+        console.log('SignIn: erro em getUser: ' + e);
+      });
+  };
 
   const recuperarSenha = () => {
     navigation.navigate('ForgotPassword');
@@ -32,6 +59,7 @@ const SignIn = ({navigation}) => {
             Alert.alert('Erro', 'Verifique seu email para prosseguir.');
             return;
           }
+          getUser();
           navigation.dispatch(
             CommonActions.reset({
               index: 0,
