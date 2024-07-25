@@ -24,6 +24,12 @@ const SignIn = ({navigation}) => {
     try {
       data.pass = pass;
       await EncryptedStorage.setItem('user_session', JSON.stringify({data}));
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{name: 'Home'}],
+        }),
+      );
     } catch (e) {
       console.log('SignIn: erro em storeUserSession: ' + e);
     }
@@ -60,12 +66,6 @@ const SignIn = ({navigation}) => {
             return;
           }
           getUser();
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 0,
-              routes: [{name: 'Home'}],
-            }),
-          );
         })
         .catch(e => {
           console.log('SignIn: erro em entrar ' + e);
@@ -118,7 +118,8 @@ const SignIn = ({navigation}) => {
             autoCapitalize="none"
             returnKeyType="next"
             onChangeText={t => setEmail(t)}
-            onEndEditing={() => this.passTextInput.focus()}
+            onSubmitEditing={() => this.passTextInput.focus()}
+            blurOnSubmit={false}
           />
           <TextInput
             ref={ref => {

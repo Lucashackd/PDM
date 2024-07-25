@@ -96,7 +96,8 @@ const SignUp = ({navigation}) => {
         autoCapitalize="words"
         returnKeyType="next"
         onChangeText={t => setNome(t)}
-        onEndEditing={() => this.emailTextInput.focus()}
+        onSubmitEditing={() => this.emailTextInput.focus()}
+        blurOnSubmit={false}
       />
       <TextInput
         ref={ref => {
@@ -108,7 +109,8 @@ const SignUp = ({navigation}) => {
         autoCapitalize="none"
         returnKeyType="next"
         onChangeText={t => setEmail(t)}
-        onEndEditing={() => this.passTextInput.focus()}
+        onSubmitEditing={() => this.passTextInput.focus()}
+        blurOnSubmit={false}
       />
       <TextInput
         ref={ref => {
@@ -120,7 +122,8 @@ const SignUp = ({navigation}) => {
         keyboardType="default"
         returnKeyType="next"
         onChangeText={t => setPass(t)}
-        onEndEditing={() => this.confirmPassTextInput.focus()}
+        onSubmitEditing={() => this.confirmPassTextInput.focus()}
+        blurOnSubmit={false}
       />
       <TextInput
         ref={ref => {
@@ -132,7 +135,7 @@ const SignUp = ({navigation}) => {
         keyboardType="default"
         returnKeyType="send"
         onChangeText={t => setConfirmPass(t)}
-        onEndEditing={() => cadastrar()}
+        onSubmitEditing={() => cadastrar()}
       />
       <MyButton texto="Cadastrar" onClick={cadastrar} />
     </Body>
