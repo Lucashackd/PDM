@@ -6,27 +6,19 @@ import auth from '@react-native-firebase/auth';
 import EncryptedStorage from 'react-native-encrypted-storage';
 
 const Home = ({navigation}) => {
-  async function retrieveUserSession() {
+  async function removeUserSession() {
     try {
-      const session = await EncryptedStorage.getItem('user_session');
-      console.log('retrieveUserSession');
-      console.log(session);
-
-      if (session !== undefined) {
-        // Congrats! You've just retrieved your first value!
-        return JSON.parse(session);
-      }
+      await EncryptedStorage.removeItem('user_session');
     } catch (error) {
-      console.log('Home: erro em retrieveUserSession: ' + error);
+      console.log('Home: erro em removeUserSession: ' + error);
     }
   }
-
-  retrieveUserSession();
 
   const sair = () => {
     auth()
       .signOut()
       .then(() => {
+        removeUserSession();
         navigation.dispatch(
           CommonActions.reset({
             index: 0,

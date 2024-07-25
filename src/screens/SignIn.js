@@ -23,6 +23,7 @@ const SignIn = ({navigation}) => {
   async function storeUserSession(data) {
     try {
       data.pass = pass;
+      console.log(data);
       await EncryptedStorage.setItem('user_session', JSON.stringify({data}));
       navigation.dispatch(
         CommonActions.reset({
