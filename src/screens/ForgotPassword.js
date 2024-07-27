@@ -9,7 +9,6 @@ const ForgotPassword = ({navigation}) => {
 
   const recover = () => {
     if (email !== '') {
-      console.log(email);
       auth()
         .sendPasswordResetEmail(email)
         .then(r => {

@@ -9,8 +9,6 @@ const Preload = ({navigation}) => {
   async function retrieveUserSession() {
     try {
       const session = await EncryptedStorage.getItem('user_session');
-      console.log('PRELOAD retrieveUserSession');
-      console.log(session);
       if (session !== undefined) {
         return JSON.parse(session);
       } else {
