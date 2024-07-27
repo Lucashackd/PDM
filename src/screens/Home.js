@@ -1,38 +1,36 @@
-import React from 'react';
-import {View} from 'react-native';
-import MyButton from '../components/MyButton';
-import {CommonActions} from '@react-navigation/native';
-import auth from '@react-native-firebase/auth';
-import EncryptedStorage from 'react-native-encrypted-storage';
+import React, {useEffect} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import {COLORS} from '../assets/colors';
+import LogoutButton from '../components/LogoutButton';
 
 const Home = ({navigation}) => {
-  async function removeUserSession() {
-    try {
-      await EncryptedStorage.removeItem('user_session');
-    } catch (error) {
-      console.log('Home: erro em removeUserSession: ' + error);
-    }
-  }
-
-  const sair = () => {
-    auth()
-      .signOut()
-      .then(() => {
-        removeUserSession();
-        navigation.dispatch(
-          CommonActions.reset({
-            index: 0,
-            routes: [{name: 'SignIn'}],
-          }),
-        );
-      });
-  };
+  useEffect(() => {
+    navigation.setOptions({
+      // headerLeft: false,
+      title: 'Usuários',
+      headerStyle: {backgroundColor: COLORS.primary},
+      headerTitleStyle: {color: COLORS.black},
+      headerRight: () => <LogoutButton />,
+    });
+  }, []);
 
   return (
-    <View>
-      <MyButton texto="SAIR" onClick={sair} />
+    <View style={styles.container}>
+      <Text style={styles.texto}>Home</Text>
+      {/* <MyButton texto="SAIR" onClick={sair} /> */}
     </View>
   );
 };
 
 export default Home;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  texto: {
+    fontSize: 24,
+  },
+});
