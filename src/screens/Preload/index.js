@@ -1,9 +1,8 @@
 import React, {useEffect} from 'react';
 import {Container, Image} from './styles';
 import EncryptedStorage from 'react-native-encrypted-storage';
-import {Alert} from 'react-native';
-import auth from '@react-native-firebase/auth';
-import {CommonActions} from '@react-navigation/native';
+// import {Alert} from 'react-native';
+// import auth from '@react-native-firebase/auth';
 
 const Preload = ({navigation}) => {
   async function retrieveUserSession() {
@@ -22,43 +21,44 @@ const Preload = ({navigation}) => {
   const loginUser = async () => {
     const user = await retrieveUserSession();
     if (user) {
-      auth()
-        .signInWithEmailAndPassword(user.data.email, user.data.pass)
-        .then(() => {
-          navigation.reset({
-            index: 0,
-            routes: [{name: 'Home'}],
-          });
-        })
-        .catch(e => {
-          console.log('SignIn: erro em entrar ' + e);
-          switch (e.code) {
-            case 'auth/invalid-credential':
-              Alert.alert('ERRO', 'Credencial inválida.');
-              break;
-            case 'auth/user-not-found':
-              Alert.alert('ERRO', 'Usuário não encontrado.');
-              break;
-            case 'auth/wrong-password':
-              Alert.alert('ERRO', 'Senha inválida.');
-              break;
-            case 'auth/invalid-email':
-              Alert.alert('ERRO', 'Email inválido.');
-              break;
-            case 'auth/user-disabled':
-              Alert.alert('ERRO', 'Usuário desativado.');
-              break;
-            default:
-              Alert.alert('ERRO AO LOGAR', `${e}`);
-          }
-        });
+      navigation.reset({
+        index: 0,
+        routes: [{name: 'Home'}],
+      });
+      // auth()
+      //   .signInWithEmailAndPassword(user.data.email, user.data.pass)
+      //   .then(() => {
+          
+      //   })
+      //   .catch(e => {
+      //     console.log('SignIn: erro em entrar ' + e);
+      //     switch (e.code) {
+      //       case 'auth/invalid-credential':
+      //         Alert.alert('ERRO', 'Credencial inválida.');
+      //         break;
+      //       case 'auth/user-not-found':
+      //         Alert.alert('ERRO', 'Usuário não encontrado.');
+      //         break;
+      //       case 'auth/wrong-password':
+      //         Alert.alert('ERRO', 'Senha inválida.');
+      //         break;
+      //       case 'auth/invalid-email':
+      //         Alert.alert('ERRO', 'Email inválido.');
+      //         break;
+      //       case 'auth/user-disabled':
+      //         Alert.alert('ERRO', 'Usuário desativado.');
+      //         break;
+      //       default:
+      //         Alert.alert('ERRO AO LOGAR', `${e}`);
+      //     }
+      //   });
     } else {
-      navigation.dispatch(
-        CommonActions.reset({
-          index: 0,
-          routes: [{name: 'SignIn'}],
-        }),
-      );
+      // navigation.dispatch(
+      //   CommonActions.reset({
+      //     index: 0,
+      //     routes: [{name: 'SignIn'}],
+      //   }),
+      // );
     }
   };
 

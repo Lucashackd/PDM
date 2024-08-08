@@ -7,7 +7,7 @@ const Home = ({navigation}) => {
   useEffect(() => {
     navigation.setOptions({
       // headerLeft: false,
-      title: 'Usuários',
+      title: 'Home',
       headerStyle: {backgroundColor: COLORS.primary},
       headerTitleStyle: {color: COLORS.black},
       headerRight: () => <LogoutButton />,
@@ -17,7 +17,6 @@ const Home = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.texto}>Home</Text>
-      {/* <MyButton texto="SAIR" onClick={sair} /> */}
     </View>
   );
 };
